@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
   level.addEventListener("change", () => selectionHandler(level));
 
   let create = document.getElementById("create");
-  create.addEventListener("click", () => createPuzzle());
-  log(level);
+  create.addEventListener("click", () => initializePuzzleGrid());
+
   fetch("static/1st_grade_vocabulary_words.json")
     .then((response) => response.json())
     .then((json) => parseJson(json))
@@ -38,49 +38,9 @@ function parseJson(json) {
   // 1. remember the original JSON
   let vocab = { wordVocab: "", isSelected: false };
   go.json = json;
-  go.wordsSet = [];
-  // select vocabularies for puzzle
-  for (let i = 0; i < numberOfWord; i++) {
-    let num = getRandomInt(go.json.length);
-    log(num);
-    if (go.json[num] != null) {
-      go.wordsSet[i] = go.json[num].word.toUpperCase();
-      go.json[num] = null;
-    } else i--;
-  }
-  go.wordsSet.sort();
-  log(go.wordsSet);
-  // generate grid 2D array
-  let gridRow = [];
-  for (i = 0; i < rowNumber; i++) {
-    gridRow.push([
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-      "#",
-    ]);
-  }
-  log(gridRow[0][0]);
-
-  // place words to the grid
-  fillGridWithVocabularies(gridRow);
-  // display puzzle
-  createPuzzle(gridRow);
 }
 
 function checkAllPlace(grid, i, j, k, vocab) {
-  log("checkAllPlace called");
   if (grid[j][k] != "#") {
     if (grid[j][k] != vocab.charAt(i)) {
       return false;
@@ -89,7 +49,6 @@ function checkAllPlace(grid, i, j, k, vocab) {
   return true;
 }
 function isFit(grid, x, y, vector, vocab) {
-  log("isFit called");
   isCompleted = true;
   switch (vector) {
     case 0:
@@ -163,7 +122,6 @@ function isFit(grid, x, y, vector, vocab) {
 }
 
 function placeWordToGrid(grid, x, y, vector, vocab) {
-  log("place word to grid called");
   switch (vector) {
     case 0:
       for (i = 0, j = x, k = y; i < vocab.length; i++, j--) {
@@ -209,7 +167,6 @@ function placeWordToGrid(grid, x, y, vector, vocab) {
 }
 // fill the grid with vocabularies
 function fillGridWithVocabularies(grid) {
-  log("fill grid with vocab called");
   let x = 0,
     y = 0;
   isPlaced = false;
@@ -235,19 +192,91 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function urlHandler(e) {}
-
 function selectionHandler(e) {
   go.difficultyLevel = e.value;
   log(go.difficultyLevel);
 }
 
-function createPuzzle(grid) {
-  log("create function called level is ");
+function initializePuzzleGrid() {
   // hide input area
   document.getElementById("input-div").style.display = "none";
-  document.getElementById("message").innerHTML = "Here your puzzle. Enjoy!";
+  document.getElementById("puzzleCreated").innerHTML =
+    "Here your puzzle. Enjoy!";
+  go.wordsSet = [];
 
+  // select vocabularies for puzzle
+  for (let i = 0; i < numberOfWord; i++) {
+    let num = getRandomInt(go.json.length);
+    if (go.json[num] != null) {
+      go.wordsSet[i] = go.json[num].word.toUpperCase();
+      go.json[num] = null;
+    } else i--;
+  }
+  go.wordsSet.sort();
+  log(go.wordsSet);
+  // generate grid 2D array
+  let gridRow = [];
+  for (i = 0; i < rowNumber; i++) {
+    gridRow.push([
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+      "#",
+    ]);
+  }
+  // place words to the grid
+  fillGridWithVocabularies(gridRow);
+  // replace '#' with random letters
+  fillGridWithRandomLetters(gridRow);
+  // display puzzle
+  displayPuzzle(gridRow);
+  displayWordList(go.wordsSet);
+}
+function fillGridWithRandomLetters(gridRow) {
+  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  for (let i = 0; i < rowNumber; i++) {
+    for (let j = 0; j < columnNumber; j++) {
+      if(gridRow[i][j] == '#'){
+        gridRow[i][j] = alphabet[Math.floor(Math.random() * alphabet.length)];
+      }
+    }
+  }
+}
+function displayWordList(wordSet) {
+  document.getElementById("wordList").innerHTML = "Word List:";
+  // creates a <table> element and a <tbody> element
+  const wordsTbl = document.getElementById("wordsTable");
+  const wordsTblBody = document.createElement("tbody");
+  // creating all cells
+  // creates a table row
+  for (let j = 0; j < numberOfWord; j++) {
+    const wordsRow = document.createElement("tr");
+    // Create a <td> element and a text node, make the text
+    // node the contents of the <td>, and put the <td> at
+    // the end of the table row
+    const wordsCell = document.createElement("td");
+    const wordsCellText = document.createTextNode(`${wordSet[j]}`);
+    wordsCell.appendChild(wordsCellText);
+    wordsRow.appendChild(wordsCell);
+    // add the row to the end of the table body
+    wordsTblBody.appendChild(wordsRow);
+  }
+  // put the <tbody> in the <table>
+  wordsTbl.appendChild(wordsTblBody);
+}
+
+function displayPuzzle(grid) {
   // creates a <table> element and a <tbody> element
   const tbl = document.getElementById("puzzleTable");
   const tblBody = document.createElement("tbody");
