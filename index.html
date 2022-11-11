@@ -15,7 +15,7 @@
     />
     <!-- local css import -->
     <link rel="stylesheet" href="css/style.css" />
-
+    <script src="http://ejd.songho.ca/syst24444/Logger.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"
       integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA=="
@@ -24,31 +24,36 @@
     ></script>
 
     <!-- local js import -->
-    <script type="" src="js/script.js"></script>
+    <script src="js/script.js"></script>
     <title>Word Search Puzzle</title>
   </head>
   <body>
-    <h2>Please select your preferences!</h2>
-    <div class="container">
-      <form action="#" method="post">
-        <div class="col-4 mb-3">
-          <label class="form-label">Difficulty</label>
-          <select id="difficultyLevel" class="form-select">
-            <option selected>Please select</option>
-            <option value="Grade-1">Grade-1</option>
-            <option value="Grade-2">Grade-2</option>
-            <option value="Grade-3">Grade-3</option>
-            <option value="Grade-4">Grade-4</option>
-            <option value="Grade-5">Grade-5</option>
-          </select>
-        </div>
-        <br />
-        <div class="button">
-          <button id="createPuzzle" type="submit" class="btn btn-primary">
-            Create Puzzle
-          </button>
-        </div>
-      </form>
+    <div id="input-div">
+      <h2>Please select your preferences!</h2>
+      <div class="container">
+        <form>
+          <div class="col-4 mb-3">
+            <label class="form-label">Difficulty</label>
+            <select id="level" class="form-select">
+              <option selected="selected">Please select</option>
+              <option value="Grade-1">Grade-1</option>
+              <option value="Grade-2">Grade-2</option>
+              <option value="Grade-3">Grade-3</option>
+              <option value="Grade-4">Grade-4</option>
+              <option value="Grade-5">Grade-5</option>
+            </select>
+          </div>
+        </form>
+        <button id="create" class="btn btn-primary">
+          Create Puzzle
+        </button>
+      </div>
     </div>
+    <section class="monoFont">
+      <h1 id="message"></h1>
+      <table id="puzzleTable" class="table table-borderless th-lg">
+
+      </table>
+    </section>
   </body>
 </html>
