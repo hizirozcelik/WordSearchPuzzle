@@ -243,6 +243,7 @@ function initializePuzzleGrid() {
   displayPuzzle(gridRow);
   displayWordList(go.wordsSet);
 }
+
 function fillGridWithRandomLetters(gridRow) {
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let i = 0; i < rowNumber; i++) {
