@@ -2,11 +2,12 @@
 //file name: script.js -- This is main JS file for Word Search Puzzle app
 //Date: Nov 10th, 2022
 
-// contsnts for puzzle grid
+// contants for puzzle grid
 const rowNumber = 15;
 const columnNumber = 15;
 const numberOfWord = 15;
-go = {};
+go = {}; //global empty object for variables
+
 // main entry point
 document.addEventListener("DOMContentLoaded", () => {
   log("page is loaded");
@@ -166,7 +167,7 @@ function placeWordToGrid(grid, x, y, vector, vocab) {
   }
 }
 // fill the grid with vocabularies
-function fillGridWithVocabularies(grid) {
+function fillGridWithVocabularies(grid, solution) {
   let x = 0,
     y = 0;
   isPlaced = false;
@@ -202,6 +203,9 @@ function initializePuzzleGrid() {
   document.getElementById("input-div").style.display = "none";
   document.getElementById("puzzleCreated").innerHTML =
     "Here your puzzle. Enjoy!";
+  document.getElementById("footNote").innerHTML =
+    "Please print to solve! Online play coming soon!";
+
   go.wordsSet = [];
 
   // select vocabularies for puzzle
@@ -235,8 +239,14 @@ function initializePuzzleGrid() {
       "#",
     ]);
   }
+
   // place words to the grid
   fillGridWithVocabularies(gridRow);
+
+  // copies just values, not references!
+
+  let solution = getCopyOfMatrix(gridRow);
+  go.solutionGrid = solution;
   // replace '#' with random letters
   fillGridWithRandomLetters(gridRow);
   // display puzzle
@@ -248,14 +258,19 @@ function fillGridWithRandomLetters(gridRow) {
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   for (let i = 0; i < rowNumber; i++) {
     for (let j = 0; j < columnNumber; j++) {
-      if(gridRow[i][j] == '#'){
+      if (gridRow[i][j] == "#") {
         gridRow[i][j] = alphabet[Math.floor(Math.random() * alphabet.length)];
       }
     }
   }
 }
+
+function getCopyOfMatrix(mat) {
+  return JSON.parse(JSON.stringify(mat));
+}
+
 function displayWordList(wordSet) {
-  document.getElementById("wordList").innerHTML = "Word List:";
+  document.getElementById("wordList").innerHTML = "Word List";
   // creates a <table> element and a <tbody> element
   const wordsTbl = document.getElementById("wordsTable");
   const wordsTblBody = document.createElement("tbody");

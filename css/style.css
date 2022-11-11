@@ -1,36 +1,41 @@
 * {
-    padding: 10;
-    margin: 10;
-    font-size: 20;
-  }
+  padding: 10px;
+  margin: Auto;
+  font-size: 20;
+  /* text-align: center; */
+}
+body{
+text-align: center;
+}
 .monoFont {
-  font-family: 'Courier New', Courier, monospace;
-  display:block;
-  margin: auto;
+  font-family: "Courier New", Courier, monospace;
+  display: block;
 }
 .row {
   display: flex;
-  margin-left:-5px;
-  margin-right:-5px;
+  margin-left: -5px;
+  margin-right: -5px;
 }
 
 .column {
-  flex:20%;
+  flex: 20%;
   padding: 5px;
 }
 .column2 {
-  flex:20%;
+  flex: 20%;
   padding: 5px;
 }
 
-#puzzleTable{
+#puzzleTable {
   font-size: 20px;
-
-  /* width: 50%; */
 }
 
-#wordsTable{
+#wordsTable {
   font-size: 20px;
-
-  /* width: 10%; */
+}
+#wordList{
+  text-decoration: underline;
+}
+#solution{
+  font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
