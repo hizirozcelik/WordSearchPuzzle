@@ -14,31 +14,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // event handlers
   let level = document.getElementById("level");
-  level.addEventListener("change", () => selectionHandler(level));
+  level.selectedIndex = 0; //set default for first option
+  go.difficultyLevel = level.value; // set deffault value for the puzzle
+  level.addEventListener("change", () => selectionHandler(level.value));
 
   let create = document.getElementById("create");
   create.addEventListener("click", () => initializePuzzleGrid());
+  
+  URLs = [];
+  URLs[1] = "static/1st_grade_vocabulary_words.json";
+  URLs[2] = "static/2nd_grade_vocabulary_words.json";
+  URLs[3] = "static/3rd_grade_vocabulary_words.json";
+  URLs[4] = "static/4th_grade_vocabulary_words.json";
+  URLs[5] = "static/5th_grade_vocabulary_words.json";
 
-  fetch("static/1st_grade_vocabulary_words.json")
-    .then((response) => response.json())
-    .then((json) => parseJson(json))
-    .catch((error) => log(error.message));
-
-  // fetch("static/2nd_grade_vocabulary_words.json")
-  //   .then((response) => response.json())
-  //   .then((data) => parseJson(data))
-  //   .catch((error) => log(error.message));
-
-  // fetch("static/3rd_grade_vocabulary_words.json")
-  // fetch("static/4th_grade_vocabulary_words.json")
-  // fetch("static/5th_grade_vocabulary_words.json")
+  for (let i = 1; i < 6; i++) {
+    fetch(URLs[i])
+      .then((response) => response.json())
+      .then((json) => parseJson(json, i))
+      .catch((error) => log(error.message));
+  }
 });
 
-function parseJson(json) {
-  log("JSON is loaded" + json.length);
-  // 1. remember the original JSON
-  let vocab = { wordVocab: "", isSelected: false };
-  go.json = json;
+function parseJson(json, i) {
+  if ((i == 1)) go.grade1 = json;
+  if ((i == 2)) go.grade2 = json;
+  if ((i == 3)) go.grade3 = json;
+  if ((i == 4)) go.grade4 = json;
+  if ((i == 5)) go.grade5 = json;
+
+  log("JSON is loaded number of words on the list is " + json.length);
+}
+
+function myFunction() {
+  let x = document.getElementById("myDIV");
+  let buttonText = document.getElementById("buttonText");
+  if (x.style.display === "block") {
+      x.style.display = "none";
+      buttonText.innerText="Show solution";
+  } else {
+      x.style.display = "block";
+      buttonText.innerText="Hide solution"
+  }
 }
 
 function checkAllPlace(grid, i, j, k, vocab) {
@@ -167,7 +184,7 @@ function placeWordToGrid(grid, x, y, vector, vocab) {
   }
 }
 // fill the grid with vocabularies
-function fillGridWithVocabularies(grid, solution) {
+function fillGridWithVocabularies(grid) {
   let x = 0,
     y = 0;
   isPlaced = false;
@@ -193,16 +210,27 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-function selectionHandler(e) {
-  go.difficultyLevel = e.value;
+function selectionHandler(val) {
+  go.difficultyLevel = val;
   log(go.difficultyLevel);
+
 }
 
 function initializePuzzleGrid() {
+  log(go.difficultyLevel);
+  // Remember the json with user selection
+  if ((go.difficultyLevel == "Grade-1")) go.json = go.grade1;
+  if ((go.difficultyLevel == "Grade-2")) go.json = go.grade2;
+  if ((go.difficultyLevel == "Grade-3")) go.json = go.grade3;
+  if ((go.difficultyLevel == "Grade-4")) go.json = go.grade4;
+  if ((go.difficultyLevel == "Grade-5")) go.json = go.grade5;
+
   // hide input area
   document.getElementById("input-div").style.display = "none";
+  // display puzzle area
+  document.getElementById("btnHide").style.display = "block";
   document.getElementById("puzzleCreated").innerHTML =
-    "Here your puzzle. Enjoy!";
+    "Puzzle created with " +go.difficultyLevel + " words. Enjoy!";
   document.getElementById("footNote").innerHTML =
     "Please print to solve! Online play coming soon!";
 
@@ -244,7 +272,6 @@ function initializePuzzleGrid() {
   fillGridWithVocabularies(gridRow);
 
   // copies just values, not references!
-
   let solution = getCopyOfMatrix(gridRow);
   go.solutionGrid = solution;
   // replace '#' with random letters
@@ -252,6 +279,9 @@ function initializePuzzleGrid() {
   // display puzzle
   displayPuzzle(gridRow);
   displayWordList(go.wordsSet);
+  displaySolution(go.solutionGrid);
+
+
 }
 
 function fillGridWithRandomLetters(gridRow) {
@@ -295,6 +325,31 @@ function displayWordList(wordSet) {
 function displayPuzzle(grid) {
   // creates a <table> element and a <tbody> element
   const tbl = document.getElementById("puzzleTable");
+  const tblBody = document.createElement("tbody");
+
+  // creating all cells
+  for (let i = 0; i < rowNumber; i++) {
+    // creates a table row
+    const row = document.createElement("tr");
+
+    for (let j = 0; j < columnNumber; j++) {
+      // Create a <td> element and a text node, make the text
+      // node the contents of the <td>, and put the <td> at
+      // the end of the table row
+      const cell = document.createElement("td");
+      const cellText = document.createTextNode(`${grid[i][j]}`);
+      cell.appendChild(cellText);
+      row.appendChild(cell);
+    }
+    // add the row to the end of the table body
+    tblBody.appendChild(row);
+  }
+  // put the <tbody> in the <table>
+  tbl.appendChild(tblBody);
+}
+function displaySolution(grid) {
+  // creates a <table> element and a <tbody> element
+  const tbl = document.getElementById("solutionTable");
   const tblBody = document.createElement("tbody");
 
   // creating all cells
