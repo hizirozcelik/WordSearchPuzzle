@@ -29,24 +29,24 @@
   </head>
   <body>
     <div id="input-div">
-      <h2>Please select your preferences!</h2>
+      <h2>Word Search Puzzle</h2>
+      <p>Create a word seach puzzle based on your kids grades.</p> 
+      <p>Word list created in line with Canadian curriculum.</p>
       <!-- <div class="container"> -->
-        <form>
-          <div class="col-3 mb-3">
-            <label class="select-label">Please select vocabularies level</label>
-            <select id="level" class="form-select">
-              <option value="Grade-1" selected>Grade-1</option>
-              <option value="Grade-2">Grade-2</option>
-              <option value="Grade-3">Grade-3</option>
-              <option value="Grade-4">Grade-4</option>
-              <option value="Grade-5">Grade-5</option>
-            </select>
-            
-          </div>
+      <form>
+        <div class="col-3 mb-3">
+          <label class="select-label">Please select vocabularies level</label>
+          <select id="level" class="form-select">
+            <option value="Grade-1">Grade-1</option>
+            <option value="Grade-2">Grade-2</option>
+            <option value="Grade-3">Grade-3</option>
+            <option value="Grade-4">Grade-4</option>
+            <option value="Grade-5">Grade-5</option>
+          </select>
+        </div>
+      </form>
+      <button id="create" class="btn btn-primary">Create Puzzle</button>
 
-        </form>
-        <button id="create" class="btn btn-primary">Create Puzzle</button>
-        
       <!-- </div> -->
     </div>
     <section class="monoFont">
@@ -59,15 +59,38 @@
           <h2 id="wordList"></h2>
           <table id="wordsTable" class="table table-borderless"></table>
         </div>
-      </div> 
+      </div>
       <p id="footNote"></p>
-
     </section>
     
+    
+    <div id="btnHide">
+      <button
+        id="buttonText"
+        class="btn btn-primary btn-sm"
+        onclick="myFunction()"
+      >
+      Show solution
+      </button>
+      <a href="index.html" class="link-primary">Create new puzzle</a>
+  </div>
+      <div id="myDIV">
+      <section class="monoFont">
+        <div class="row">
+          <div class="column">
+            <table id="solutionTable" class="table table-borderless th-lg">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
   </body>
   <footer class="bg-light text-lg-start">
     <!-- Copyright -->
-    <div class="text-leftAligned p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div
+      class="text-leftAligned p-3" >
       Created by Hizir Ozcelik, November 2022 @Oakville
       <!-- <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
     </div>
