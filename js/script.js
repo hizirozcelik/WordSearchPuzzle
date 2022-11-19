@@ -224,7 +224,7 @@ function initializePuzzleGrid() {
   if ((go.difficultyLevel == "Grade-3")) go.json = go.grade3;
   if ((go.difficultyLevel == "Grade-4")) go.json = go.grade4;
   if ((go.difficultyLevel == "Grade-5")) go.json = go.grade5;
-
+log(go.json);
   // hide input area
   document.getElementById("input-div").style.display = "none";
   // display puzzle area
