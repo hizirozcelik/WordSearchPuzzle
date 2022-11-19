@@ -10,8 +10,7 @@ go = {}; //global empty object for variables
 
 // main entry point
 document.addEventListener("DOMContentLoaded", () => {
-  log("page is loaded");
-
+  console.log("page is loaded");
   // event handlers
   let level = document.getElementById("level");
   level.selectedIndex = 0; //set default for first option
@@ -32,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(URLs[i])
       .then((response) => response.json())
       .then((json) => parseJson(json, i))
-      .catch((error) => log(error.message));
+      .catch((error) => console.log(error.message));
   }
 });
 
@@ -43,7 +42,7 @@ function parseJson(json, i) {
   if ((i == 4)) go.grade4 = json;
   if ((i == 5)) go.grade5 = json;
 
-  log("JSON is loaded number of words on the list is " + json.length);
+  console.log("JSON is loaded number of words on the list is " + json.length);
 }
 
 function myFunction() {
@@ -212,19 +211,19 @@ function getRandomInt(max) {
 
 function selectionHandler(val) {
   go.difficultyLevel = val;
-  log(go.difficultyLevel);
+  console.log(go.difficultyLevel);
 
 }
 
 function initializePuzzleGrid() {
-  log(go.difficultyLevel);
+  console.log(go.difficultyLevel);
   // Remember the json with user selection
   if ((go.difficultyLevel == "Grade-1")) go.json = go.grade1;
   if ((go.difficultyLevel == "Grade-2")) go.json = go.grade2;
   if ((go.difficultyLevel == "Grade-3")) go.json = go.grade3;
   if ((go.difficultyLevel == "Grade-4")) go.json = go.grade4;
   if ((go.difficultyLevel == "Grade-5")) go.json = go.grade5;
-log(go.json);
+
   // hide input area
   document.getElementById("input-div").style.display = "none";
   // display puzzle area
@@ -245,7 +244,7 @@ log(go.json);
     } else i--;
   }
   go.wordsSet.sort();
-  log(go.wordsSet);
+  console.log(go.wordsSet);
   // generate grid 2D array
   let gridRow = [];
   for (i = 0; i < rowNumber; i++) {
