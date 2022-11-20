@@ -45,7 +45,7 @@ function parseJson(json, i) {
   console.log("JSON is loaded number of words on the list is " + json.length);
 }
 
-function myFunction() {
+function toggleDiv() {
   let x = document.getElementById("myDIV");
   let buttonText = document.getElementById("buttonText");
   if (x.style.display === "block") {
@@ -231,7 +231,7 @@ function initializePuzzleGrid() {
   document.getElementById("puzzleCreated").innerHTML =
     "Puzzle created with " +go.difficultyLevel + " words. Enjoy!";
   document.getElementById("footNote").innerHTML =
-    "Please print to solve! Online play coming soon!";
+    "Your puzzle file saved on your default folder! You can print and solve it! Online play coming soon!";
 
   go.wordsSet = [];
 
@@ -277,11 +277,44 @@ function initializePuzzleGrid() {
   fillGridWithRandomLetters(gridRow);
   // display puzzle
   displayPuzzle(gridRow);
+  textToFile(gridRow,go.wordsSet, go.solutionGrid,"puzzle.txt");
   displayWordList(go.wordsSet);
   displaySolution(go.solutionGrid);
-
-
 }
+
+// Generate a string from table
+function textToFile(gridRow, wordsSet, solution, filename) {
+  var text = "Enjoy the puzzle! \n\n";
+  let k = 0;
+  for (var i = 0; i < gridRow.length; i++) {
+    for (var j = 0; j < gridRow[i].length; j++) {
+      text += gridRow[i][j] + " ";
+    }
+    text += "\t" + wordsSet[k] + "\r";
+    k++;
+  }
+  text += "\n\n Solution: \n\n";
+  for (var i = 0; i < gridRow.length; i++) {
+    for (var j = 0; j < gridRow[i].length; j++) {
+      text += solution[i][j] + " ";
+    }
+    text += "\r";
+  }
+  text += "\n\nThank you for using the puzzle generator! \n";
+  text += "Online play coming soon! \n";
+  text += "Created by Hizir Ozcelik, Nov 2022 @Sheridon College \n";
+
+  var blob = new Blob([text], { type: "text/plain" });
+  var anchor = document.createElement("a");
+  anchor.download = filename;
+  anchor.href = window.URL.createObjectURL(blob);
+  anchor.target = "_blank";
+  anchor.style.display = "none"; // just to be safe!
+  document.body.appendChild(anchor);
+  anchor.click();
+  document.body.removeChild(anchor);
+} 
+
 
 function fillGridWithRandomLetters(gridRow) {
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
