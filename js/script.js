@@ -227,7 +227,9 @@ function initializePuzzleGrid() {
   // hide input area
   document.getElementById("id-user").style.display = "none";
   // display puzzle area
+  document.getElementById("id-hide").style.display = "block";
   document.getElementById("btnHide").style.display = "block";
+
   document.getElementById("puzzleCreated").innerHTML =
     "Puzzle created with " +go.difficultyLevel + " words. Enjoy!";
   document.getElementById("footNote").innerHTML =
@@ -381,6 +383,7 @@ function displayPuzzle(grid) {
   tbl.appendChild(tblBody);
 }
 function displaySolution(grid) {
+  document.getElementById("solution-title").innerHTML = "Solution";
   // creates a <table> element and a <tbody> element
   const tbl = document.getElementById("solutionTable");
   const tblBody = document.createElement("tbody");

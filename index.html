@@ -5,21 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-
     <!-- local css import -->
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/utilities.css" />
-
-
     <!-- local js import -->
     <script src="js/script.js"></script>
+
     <title>Word Search Puzzle</title>
   </head>
   <body>
     <section id="id-user" class="user">
       <div>
         <h1>Word Search Puzzle</h1>
-        <p>Create a word seach puzzle based on your kids grades.</p> 
+        <p>Create a word seach puzzle based on your kids grades.</p>
         <p>Word list created in line with Canadian curriculum.</p>
         <form class="user-form">
           <div>
@@ -36,55 +34,38 @@
         <button id="create" class="btn btn-primary">Create Puzzle</button>
       </div>
     </section>
-
-    <section class="mono-font">
-      <h2 id="puzzleCreated"></h2>
-      <div class="row">
-        <div class="column">
-          <h2 id="puzzle-title"></h2>
-          <table id="puzzleTable" class="mono-type"></table>
-        </div>
-        <div class="column2">
-          <h2 id="wordList"></h2>
-          <table id="wordsTable" class="mono-type"></table>
-        </div>
-      </div>
-      <p id="footNote"></p>
-    </section>
-    
-    
-    <div id="btnHide">
-      <button
-        id="buttonText"
-        class="btn btn-primary btn-sm"
-        onclick="toggleDiv()"
-      >
-      Show solution
-      </button>
-      <a href="index.html" class="link-primary">Create new puzzle</a>
-  </div>
-      <div id="myDIV">
-      <section class="monoFont">
+    <div id="id-hide" class="hide">
+      <section class="mono-font">
+        <h2 id="puzzleCreated"></h2>
         <div class="row">
           <div class="column">
-            <table id="solutionTable" class="table table-borderless th-lg">
-              </tbody>
-            </table>
+            <h2 id="puzzle-title"></h2>
+            <table id="puzzleTable" class="mono-type"></table>
           </div>
+          <div class="column2">
+            <h2 id="wordList"></h2>
+            <table id="wordsTable" class="mono-type"></table>
+          </div>
+        </div>
+        <p id="footNote"></p>
+        <div id="btnHide">
+          <button id="buttonText" class="btn btn-primary" onclick="toggleDiv()">
+            Show solution
+          </button>
+          <a href="index.html">Create new puzzle</a>
         </div>
       </section>
     </div>
-  </div>
-  <footer class="bg-light text-lg-start">
-
-    <div
-      class="text-leftAligned p-3" >
-      Created by Hizir Ozcelik, November 2022 @Oakville
-
+    <div id="myDIV" class="mono-font">
+      <div class="row">
+        <div class="column">
+          <h2 id="solution-title"></h2>
+          <table id="solutionTable" class="mono-type"></table>
+        </div>
+      </div>
     </div>
-
-  </footer>
   </body>
-
-
+  <footer>
+    <div>Created by Hizir Ozcelik, November 2022 @Oakville</div>
+  </footer>
 </html>
