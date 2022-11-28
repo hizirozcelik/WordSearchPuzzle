@@ -225,7 +225,7 @@ function initializePuzzleGrid() {
   if ((go.difficultyLevel == "Grade-5")) go.json = go.grade5;
 
   // hide input area
-  document.getElementById("input-div").style.display = "none";
+  document.getElementById("id-user").style.display = "none";
   // display puzzle area
   document.getElementById("btnHide").style.display = "block";
   document.getElementById("puzzleCreated").innerHTML =
@@ -355,6 +355,7 @@ function displayWordList(wordSet) {
 }
 
 function displayPuzzle(grid) {
+  document.getElementById("puzzle-title").innerHTML = "Puzzle";
   // creates a <table> element and a <tbody> element
   const tbl = document.getElementById("puzzleTable");
   const tblBody = document.createElement("tbody");

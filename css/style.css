@@ -1,21 +1,70 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
+
+:root {
+  --primary-color: #093765;
+  --secondary-color: #cdced1;
+  --dark-color: #002240;
+  --light-color: #f4f4f4;
+  --light-yellow: hsl(55, 98%, 49%);
+
+}
 * {
-  padding: 10px;
-  margin: Auto;
-  font-size: 20;
-  /* text-align: center; */
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+
 }
-body{
-text-align: center;
+
+body {
+  font-family: "Lato", sans-serif;
+  color: #333;
+  line-height: 1.6;
+  font-size: 20px;
+  /* background-color: var(--light-yellow); */
+
 }
+
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+h1,
+h2 {
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 10px 0;
+}
+
+p {
+  margin: 10px 0;
+}
+
+
+
+
 
 #input-div, p, h2{
   margin: 0;
   padding: 5px;
 }
-.monoFont {
-  font-family: "Courier New", Courier, monospace;
-  display: block;
+
+
+.mono-type{
+  font-family: monospace;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--dark-color);
+  text-align: center;
+  margin: 0;
+  padding: 5px;
 }
+
 #btnHide{
   display: none;
 }
@@ -26,11 +75,7 @@ text-align: center;
 }
 
 .column {
-  flex: 20%;
-  padding: 5px;
-}
-.column {
-  width: 50%;
+  width: 80%;
   padding: 5px;
 }
 .column2 {
@@ -39,6 +84,7 @@ text-align: center;
 }
 
 #puzzleTable {
+  width: 100%;
   font-size: 20px;
 }
 
@@ -50,6 +96,10 @@ text-align: center;
   font-size: 20px;
 }
 #wordList{
+  text-decoration: underline;
+}
+#puzzle-title{
+  text-align: center;
   text-decoration: underline;
 }
 

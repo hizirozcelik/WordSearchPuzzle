@@ -5,58 +5,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- BootStrap libraries -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/css/bootstrap.min.css"
-      integrity="sha512-Ez0cGzNzHR1tYAv56860NLspgUGuQw16GiOOp/I2LuTmpSK9xDXlgJz3XN4cnpXWDmkNBKXR/VDMTCnAaEooxA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+
     <!-- local css import -->
     <link rel="stylesheet" href="css/style.css" />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.1/js/bootstrap.min.js"
-      integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <link rel="stylesheet" href="css/utilities.css" />
+
 
     <!-- local js import -->
     <script src="js/script.js"></script>
     <title>Word Search Puzzle</title>
   </head>
   <body>
-    <div id="input-div">
-      <h2>Word Search Puzzle</h2>
-      <p>Create a word seach puzzle based on your kids grades.</p> 
-      <p>Word list created in line with Canadian curriculum.</p>
-      <!-- <div class="container"> -->
-      <form>
-        <div class="col-3 mb-3">
-          <label class="select-label">Please select vocabularies level</label>
-          <select id="level" class="form-select">
-            <option value="Grade-1">Grade-1</option>
-            <option value="Grade-2">Grade-2</option>
-            <option value="Grade-3">Grade-3</option>
-            <option value="Grade-4">Grade-4</option>
-            <option value="Grade-5">Grade-5</option>
-          </select>
-        </div>
-      </form>
-      <button id="create" class="btn btn-primary">Create Puzzle</button>
+    <section id="id-user" class="user">
+      <div>
+        <h1>Word Search Puzzle</h1>
+        <p>Create a word seach puzzle based on your kids grades.</p> 
+        <p>Word list created in line with Canadian curriculum.</p>
+        <form class="user-form">
+          <div>
+            <label class="select-label">Please select vocabularies level</label>
+            <select id="level" class="form-select">
+              <option value="Grade-1">Grade-1</option>
+              <option value="Grade-2">Grade-2</option>
+              <option value="Grade-3">Grade-3</option>
+              <option value="Grade-4">Grade-4</option>
+              <option value="Grade-5">Grade-5</option>
+            </select>
+          </div>
+        </form>
+        <button id="create" class="btn btn-primary">Create Puzzle</button>
+      </div>
+    </section>
 
-      <!-- </div> -->
-    </div>
-    <section class="monoFont">
+    <section class="mono-font">
       <h2 id="puzzleCreated"></h2>
       <div class="row">
         <div class="column">
-          <table id="puzzleTable" class="table table-borderless th-lg"></table>
+          <h2 id="puzzle-title"></h2>
+          <table id="puzzleTable" class="mono-type"></table>
         </div>
         <div class="column2">
           <h2 id="wordList"></h2>
-          <table id="wordsTable" class="table table-borderless"></table>
+          <table id="wordsTable" class="mono-type"></table>
         </div>
       </div>
       <p id="footNote"></p>
@@ -85,14 +75,16 @@
       </section>
     </div>
   </div>
-  </body>
   <footer class="bg-light text-lg-start">
-    <!-- Copyright -->
+
     <div
       class="text-leftAligned p-3" >
       Created by Hizir Ozcelik, November 2022 @Oakville
-      <!-- <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a> -->
+
     </div>
-    <!-- Copyright -->
+
   </footer>
+  </body>
+
+
 </html>
